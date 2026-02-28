@@ -1,0 +1,15 @@
+{
+  "name": "apriltag",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@monumental-works/apriltag-node": "^1.3.0"
+  }
+}
