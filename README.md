@@ -129,7 +129,7 @@ apriltag/
 ├── package.json     # Node.js dependencies
 ├── README.md        # This file
 ├── LICENSE.md       # License information
-└── img.raw          # Captured raw image (generated)
+└── captured_image   # Captured debug image (generated)
 ```
 
 ## Dependencies
