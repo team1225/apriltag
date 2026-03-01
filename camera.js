@@ -1,4 +1,4 @@
-import { exec } from 'child_process';
+import { exec, execSync } from 'child_process';
 import { promisify } from 'util';
 import fs from 'fs';
 
@@ -9,6 +9,15 @@ class Camera {
         this.deviceId = deviceId;
         this.width = 640;
         this.height = 480;
+    }
+
+    warmUp() {
+        return execSync(`ffmpeg -f v4l2 -input_format yuyv422 \
+            -video_size ${this.width}x${this.height} \
+            -i /dev/video${this.deviceId} \
+            -t 2 \
+            -loglevel error \
+            -f null -`)
     }
 
     async captureImage() {
