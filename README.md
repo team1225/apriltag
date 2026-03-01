@@ -142,7 +142,6 @@ apriltag/
 ### Camera Not Found
 - Ensure your camera is connected and recognized by the system
 - Check device ID (try different values: 0, 1, 2, etc.)
-- Verify camera permissions on Linux: `sudo usermod -a -G video $USER`
 
 ### FFmpeg Issues
 - Ensure FFmpeg is installed and in your PATH
