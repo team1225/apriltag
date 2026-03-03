@@ -15,7 +15,7 @@ async function main() {
     await detector.ensureInitialized();
 
     // Initialize camera
-    const camera = new Camera(2);
+    const camera = new Camera(0);
 
     console.log("Warming up");
     camera.warmUp(); // Warm up the camera to stabilize exposure
