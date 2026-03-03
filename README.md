@@ -118,7 +118,7 @@ Where:
 - `exponent = -0.530211`
 - `percentage = tag_area / image_area`
 
-You may need to recalibrate these values for your specific camera setup and tag size.
+You may need to recalibrate these values for your specific camera setup and tag size. To calibrate plug real distance as x and percentage area of the tag as y to https://mycurvefit.com/ or similar.
 
 ## File Structure
 

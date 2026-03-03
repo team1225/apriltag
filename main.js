@@ -15,7 +15,7 @@ async function main() {
     await detector.ensureInitialized();
 
     // Initialize camera
-    const camera = new Camera(0);
+    const camera = new Camera(2);
 
     console.log("Warming up");
     camera.warmUp(); // Warm up the camera to stabilize exposure
@@ -45,8 +45,25 @@ async function main() {
 
             let downUpDiagonal = distance(tag.corners[0], tag.corners[2]);
             let upDownDiagonal = distance(tag.corners[1], tag.corners[3]);
+            let averageSideLength = (bottomLength + rightLength + topLength + leftLength) / 4;
+            let areaAverage = averageSideLength * averageSideLength;
 
-            console.log(`Tag ID: ${tag.id}, Bottom: ${bottomLength.toFixed(2)}, Right: ${rightLength.toFixed(2)}, Top: ${topLength.toFixed(2)}, Left: ${leftLength.toFixed(2)}, Down Diagonal: ${downUpDiagonal.toFixed(2)}, Up Diagonal: ${upDownDiagonal.toFixed(2)}`);
+            // approximate depth based on how much of the image the tag covers
+            const imageArea = imageWidth * imageHeight;
+            const percentage = areaAverage / imageArea;
+            const scale = 0.1624735;
+            const exponent = -0.530211;
+            const aproxDistance = scale * Math.pow(percentage, exponent);
+
+            // full 3-D pose (rotation + translation) requires camera intrinsics
+            // and a PnP solver; apriltag-node only returns pixel coords.
+
+
+
+
+        
+
+            console.log(`Tag ID: ${tag.id}, Bottom: ${bottomLength.toFixed(2)}, Right: ${rightLength.toFixed(2)}, Top: ${topLength.toFixed(2)}, Left: ${leftLength.toFixed(2)}, Down Diagonal: ${downUpDiagonal.toFixed(2)}, Up Diagonal: ${upDownDiagonal.toFixed(2)}, Average Area: ${areaAverage}, Distance: ${aproxDistance.toFixed(2)} m`);
 
             rgbBuffer[Math.floor(tag.corners[0][1]) * imageWidth * 3 + Math.floor(tag.corners[0][0]) * 3] = 255; // Mark corner 1
             rgbBuffer[Math.floor(tag.corners[0][1]) * imageWidth * 3 + Math.floor(tag.corners[0][0]) * 3 + 1] = 0; // Mark corner 1
